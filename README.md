@@ -1,30 +1,35 @@
-# Projet Spring Boot avec CI/CD
+# CI/CD Pipeline with GitLab CI for Spring Boot Application
 
-Ce projet est une application Java simple, développée à l'aide du framework Spring Boot. L'objectif principal de ce projet est de tester et de mettre en œuvre les concepts de CI/CD (Intégration Continue et Déploiement Continu).
+This project demonstrates the implementation of Continuous Integration and Continuous Delivery (CI/CD) using GitLab CI. The application is a simple Spring Boot Java application, and the CI/CD pipeline is defined in the `.gitlab-ci.yml` file located in the root directory.
 
-## Fonctionnalités
+## Project Overview
 
-- **Intégration Continue (CI)** : Le projet est configuré pour être intégré et testé sur Jenkins. Le fichier `Jenkinsfile` contient un script qui automatise le processus CI/CD pour cette application.
-- **Déploiement Continu (CD)** : Le processus CI/CD comprend les étapes de base suivantes :
-  - **Build** : Compilation du code source.
-  - **Test** : Exécution des tests automatisés pour vérifier la qualité du code.
-  - **Déploiement** : Déploiement de l'application sur un environnement cible.
+The `.gitlab-ci.yml` script automates the following processes:
+- **Build**: Compiles the application.
+- **Test**: Runs automated tests.
+- **Deploy**: Deploys the application to the desired environment.
 
-## Prérequis
+## Pipeline Configuration
 
-- Java JDK 8 ou supérieur
-- Maven
-- Jenkins
-- Un environnement de déploiement (par exemple, un serveur Tomcat, Docker, etc.)
+### Triggers
+The pipeline is triggered based on specific events, such as:
+- Pushing to a particular branch.
+- Specific events defined in the `rules` section of the script.
 
-## Configuration
+### Global Variables
+The script includes global variables that are used throughout the pipeline. These variables include:
+- Docker image name.
+- Docker image tag.
 
-1. **Jenkins** : Assurez-vous que Jenkins est installé et configuré sur votre machine ou serveur.
-2. **Jenkinsfile** : Le fichier `Jenkinsfile` doit être placé à la racine du projet. Il contient les étapes de build, test et déploiement.
-3. **Dépendances** : Les dépendances du projet sont gérées par Maven. Assurez-vous que le fichier `pom.xml` est correctement configuré.
+### Jobs
+Each job in the pipeline is associated with a specific stage, defined under the `stage` keyword. The stages include:
+- **Build**: Compiles the application.
+- **Test**: Runs automated tests.
+- **Deploy**: Deploys the application.
 
-## Utilisation
+Each stage specifies:
+- The Docker image to be used for execution.
+- The script to be executed within that stage.
 
-- Clonez ce dépôt sur votre machine locale :
-   ```bash
-   git clone https://github.com/votre-utilisateur/votre-projet.git
+### Secure Credentials
+The pipeline uses secure credentials to access external accounts, such as Docker Hub, for image pushing and pulling operations.
